@@ -24,7 +24,7 @@ z_orig = []
 pi=3.1415926
 u_rate = .1
 v_rate = .3
-w_rate = 0
+w_rate = .2
 for p in l:
     x_orig.append(int( p[0] *2048/2))
     y_orig.append(int( p[1] *2048/2))
@@ -43,21 +43,35 @@ x = [0]*20
 y = [0]*20
 z = [0]*20
 plt.ion()
-points = ax.scatter(x, y, z)
-plt.draw()
-while True:
-    for t in range(10):
-        for i in range (0, 20):
-            x[i] = (math.cos(u) * math.cos(v))*x_orig[i] + (math.cos(u) * math.sin(v)*math.sin(w) - math.sin(u)*math.cos(w))*y_orig[i] + (math.cos(u)*math.sin(v)*math.cos(w)+math.sin(u)*math.sin(w))*z_orig[i]
-            y[i] = (math.sin(u) * math.cos(v))*x_orig[i] + (math.sin(u) * math.sin(v)*math.sin(w) + math.cos(u)*math.cos(w))*y_orig[i] + (math.sin(u)*math.sin(v)*math.cos(w)-math.cos(u)*math.sin(w))*z_orig[i]
-            z[i] = -math.sin(v)*x_orig[i] + math.cos(v)*math.sin(w)*y_orig[i] + math.cos(v)*math.cos(w)*z_orig[i]
-        points.remove()
-        points = ax.scatter(x,y,z)
-        fig.canvas.draw_idle()
-        plt.pause(.01)
-        u += u_rate*pi*.02
-        v += v_rate*pi*.02
-        w += w_rate*pi*.02
-    u_rate = 2*np.random.random()-1
-    v_rate = 2*np.random.random()-1
-    w_rate = 2*np.random.random()-1
+points = ax.scatter(x_orig, y_orig, z_orig)
+plt.pause(1)
+u = math.asin(0.0625)
+print(2048*math.cos(u), 2048*math.sin(u))
+v = math.asin(-0.0625)
+w = math.asin(0.0625)
+for i in range (0, 20):
+    x[i] = (math.cos(u) * math.cos(v))*x_orig[i] + (math.cos(u) * math.sin(v)*math.sin(w) - math.sin(u)*math.cos(w))*y_orig[i] + (math.cos(u)*math.sin(v)*math.cos(w)+math.sin(u)*math.sin(w))*z_orig[i]
+    y[i] = (math.sin(u) * math.cos(v))*x_orig[i] + (math.sin(u) * math.sin(v)*math.sin(w) + math.cos(u)*math.cos(w))*y_orig[i] + (math.sin(u)*math.sin(v)*math.cos(w)-math.cos(u)*math.sin(w))*z_orig[i]
+    z[i] = -math.sin(v)*x_orig[i] + math.cos(v)*math.sin(w)*y_orig[i] + math.cos(v)*math.cos(w)*z_orig[i]
+points = ax.scatter(x,y,z)
+fig.canvas.draw_idle()
+plt.pause(.01)
+print(x, y, z)
+
+
+##while True:
+##    for t in range(10):
+##        for i in range (0, 20):
+##            x[i] = (math.cos(u) * math.cos(v))*x_orig[i] + (math.cos(u) * math.sin(v)*math.sin(w) - math.sin(u)*math.cos(w))*y_orig[i] + (math.cos(u)*math.sin(v)*math.cos(w)+math.sin(u)*math.sin(w))*z_orig[i]
+##            y[i] = (math.sin(u) * math.cos(v))*x_orig[i] + (math.sin(u) * math.sin(v)*math.sin(w) + math.cos(u)*math.cos(w))*y_orig[i] + (math.sin(u)*math.sin(v)*math.cos(w)-math.cos(u)*math.sin(w))*z_orig[i]
+##            z[i] = -math.sin(v)*x_orig[i] + math.cos(v)*math.sin(w)*y_orig[i] + math.cos(v)*math.cos(w)*z_orig[i]
+##        points.remove()
+##        points = ax.scatter(x,y,z)
+##        fig.canvas.draw_idle()
+##        plt.pause(.01)
+##        u += u_rate*pi*.02
+##        v += v_rate*pi*.02
+##        w += w_rate*pi*.02
+##    u_rate = 2*np.random.random()-1
+##    v_rate = 2*np.random.random()-1
+##    w_rate = 2*np.random.random()-1
