@@ -1,0 +1,8 @@
+3DVisualizer.*
+
+!3DVisualizer.srcs
+
+3DVisualizer.srcs/sources_1/ip/*/*
+
+!3DVisualizer.srcs/sources_1/ip/*/*.xci
+
