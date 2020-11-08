@@ -3,45 +3,51 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
-res = [( -894, -1016, -1148),
+res = [( -768,  -768,  -768),
 
-(-1013, -1152,   892),
+( -768,  -768,   768),
 
-(-1029,  1023, -1021),
+( -768,   768,  -768),
 
-(-1148,   888,  1019),
+( -768,   768,   768),
 
-( 1146,  -889, -1020),
+(  768,  -768,  -768),
 
-( 1027, -1024,  1020),
+(  768,  -768,   768),
 
-( 1011,  1151,  -893),
+(  768,   768,  -768),
 
-(  892,  1015,  1147),
+(  768,   768,   768),
 
-(  145, -1609,  -734),
+(    0, -1242,  -474),
 
-(-1609,  -733,  -144),
+(-1242,  -474,     0),
 
-( -534,    69, -1690),
+( -474,     0, -1242),
 
-(   72, -1692,   525),
+(    0, -1242,   474),
 
-(-1693,   525,   -65),
+(-1242,   474,     0),
 
-(  726,   148, -1611),
+(  474,     0, -1242),
 
-(  -73,  1690,  -527),
+(    0,  1242,  -474),
 
-( 1691,  -527,    63),
+( 1242,  -474,     0),
 
-( -728,  -150,  1609),
+( -474,     0,  1242),
 
-( -147,  1606,   732),
+(    0,  1242,   474),
 
-( 1607,   731,   142),
+( 1242,   474,     0),
 
-(  532,   -71,  1688)]
+(  474,     0,  1242),
+
+(  474,     0,  1242),
+
+(  474,     0,  1242),
+
+(  474,     0,  1242)]
 
 r_x = [p[0] for p in res]
 r_y = [p[1] for p in res]
@@ -95,8 +101,8 @@ for i in range (0, 20):
     x[i] = (math.cos(u) * math.cos(v))*x_orig[i] + (math.cos(u) * math.sin(v)*math.sin(w) - math.sin(u)*math.cos(w))*y_orig[i] + (math.cos(u)*math.sin(v)*math.cos(w)+math.sin(u)*math.sin(w))*z_orig[i]
     y[i] = (math.sin(u) * math.cos(v))*x_orig[i] + (math.sin(u) * math.sin(v)*math.sin(w) + math.cos(u)*math.cos(w))*y_orig[i] + (math.sin(u)*math.sin(v)*math.cos(w)-math.cos(u)*math.sin(w))*z_orig[i]
     z[i] = -math.sin(v)*x_orig[i] + math.cos(v)*math.sin(w)*y_orig[i] + math.cos(v)*math.cos(w)*z_orig[i]
-points = ax.scatter(x,y,z)
-fig.canvas.draw_idle()
+##points = ax.scatter(x,y,z)
+##fig.canvas.draw_idle()
 plt.pause(1)
 
 points = ax.scatter(r_x, r_y, r_z)
