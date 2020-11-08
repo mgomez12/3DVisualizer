@@ -26,35 +26,35 @@ module rotation_tb(
     localparam POINT_WIDTH=12;
     logic clk;
     logic rst;
-    logic valid_in = 1;
     logic signed [POINT_WIDTH-1:0] rot_in[3];
     logic signed [POINT_WIDTH-1:0] sin[3], cos[3];
     logic signed [POINT_WIDTH-1:0] rot_out[3];
     logic valid_out;
-    assign sin = {2044, 2044, 2044};
-    assign cos = {128, -128, 128};
+    assign cos = {12'd2044, 12'd2044, 12'd2044};
+    assign sin = {12'd128, -12'd128, 12'd128};
+    logic valid_in;
     
     rotation #(.POINT_WIDTH(POINT_WIDTH)) u_rotation (.*);
-    logic signed [POINT_WIDTH-1:0] points[20][3] = {{-1024, -1024, -1024},
-    {-1024, -1024, 1024}, 
-    {-1024, 1024, -1024}, 
-    {-1024, 1024, 1024}, 
-    {1024, -1024, -1024}, 
-    {1024, -1024, 1024}, 
-    {1024, 1024, -1024}, 
-    {1024, 1024, 1024}, 
-    {0, -1656, -632}, 
-    {-1656, -632, 0}, 
-    {-632, 0, -1656}, 
-    {0, -1656, 632}, 
-    {-1656, 632, 0}, 
-    {632, 0, -1656}, 
-    {0, 1656, -632}, 
-    {1656, -632, 0}, 
-    {-632, 0, 1656}, 
-    {0, 1656, 632}, 
-    {1656, 632, 0}, 
-    {632, 0, 1656}};
+    logic signed [POINT_WIDTH-1:0] points[20][3] = {{-12'd1024, -12'd1024, -12'd1024},
+    {-12'd1024, -12'd1024, 12'd1024}, 
+    {-12'd1024, 12'd1024, -12'd1024}, 
+    {-12'd1024, 12'd1024, 12'd1024}, 
+    {12'd1024, -12'd1024, -12'd1024}, 
+    {12'd1024, -12'd1024, 12'd1024}, 
+    {12'd1024, 12'd1024, -12'd1024}, 
+    {12'd1024, 12'd1024, 12'd1024}, 
+    {12'd0, -12'd1656, -12'd632}, 
+    {-12'd1656, -12'd632, 12'd0}, 
+    {-12'd632, 12'd0, -12'd1656}, 
+    {12'd0, -12'd1656, 12'd632}, 
+    {-12'd1656, 12'd632, 12'd0}, 
+    {12'd632, 12'd0, -12'd1656}, 
+    {12'd0, 12'd1656, -12'd632}, 
+    {12'd1656, -12'd632, 12'd0}, 
+    {-12'd632, 12'd0, 12'd1656}, 
+    {12'd0, 12'd1656, 12'd632}, 
+    {12'd1656, 12'd632, 12'd0}, 
+    {12'd632, 12'd0, 12'd1656}};
     always begin
         clk = ~clk;
         #5;
@@ -65,17 +65,20 @@ module rotation_tb(
         #10;
     end
     initial begin
+        valid_in = 0;
         fd = $fopen("tb_points.txt", "w");
-        clk = 0;
+        clk = 1;
         rst = 1;
         #20;
         rst = 0;
         # 10;
         for (int i = 0; i< 20; i++) begin
+            valid_in = 1;
             rot_in = points[i];
             #10;
         end
         #40;
+        $fclose(fd);
     end
         
 endmodule

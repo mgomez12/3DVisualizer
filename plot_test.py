@@ -56,6 +56,13 @@ for i in range (0, 20):
 points = ax.scatter(x,y,z)
 fig.canvas.draw_idle()
 plt.pause(.01)
+
+p = np.array([[-1],[-1],[-1]])
+T = np.array([[1,0,0],[0,math.cos(u), -math.sin(u)], [0, math.sin(u), math.cos(u)]])
+T2 = np.array([[math.cos(v), 0, math.sin(v)], [0, 1, 0], [-math.sin(v), 0, math.cos(v)]])
+first = T@p
+print(T@p)
+print(T2@first)
 print(x, y, z)
 
 
