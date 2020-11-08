@@ -11,13 +11,13 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="15720fs"></ZoomStartTime>
-      <ZoomEndTime time="80559fs"></ZoomEndTime>
-      <Cursor1Time time="42588fs"></Cursor1Time>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="80264fs"></ZoomEndTime>
+      <Cursor1Time time="85226fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="300"></NameColumnWidth>
-      <ValueColumnWidth column_width="147"></ValueColumnWidth>
+      <ValueColumnWidth column_width="143"></ValueColumnWidth>
    </column_width_setting>
    <WVObjectSize size="14" />
    <wvobject fp_name="/rotation_tb/clk" type="logic">
@@ -48,6 +48,19 @@
       <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
       <obj_property name="radix_fractionWidth">11</obj_property>
       <obj_property name="radix_otherWidth">0</obj_property>
+      <wvobject fp_name="/rotation_tb/sin[0]" type="array">
+         <obj_property name="ElementShortName">[0][11:0]</obj_property>
+         <obj_property name="ObjectShortName">[0][11:0]</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+      </wvobject>
+      <wvobject fp_name="/rotation_tb/sin[1]" type="array">
+         <obj_property name="ElementShortName">[1][11:0]</obj_property>
+         <obj_property name="ObjectShortName">[1][11:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/rotation_tb/sin[2]" type="array">
+         <obj_property name="ElementShortName">[2][11:0]</obj_property>
+         <obj_property name="ObjectShortName">[2][11:0]</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject fp_name="/rotation_tb/cos" type="array">
       <obj_property name="ElementShortName">cos[0:2][11:0]</obj_property>
@@ -60,10 +73,26 @@
    <wvobject fp_name="/rotation_tb/rot_out" type="array">
       <obj_property name="ElementShortName">rot_out[0:2][11:0]</obj_property>
       <obj_property name="ObjectShortName">rot_out[0:2][11:0]</obj_property>
-      <obj_property name="Radix">REALRADIX</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
-      <obj_property name="radix_fractionWidth">10</obj_property>
+      <obj_property name="radix_fractionWidth">11</obj_property>
       <obj_property name="radix_otherWidth">0</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/rotation_tb/rot_out[0]" type="array">
+         <obj_property name="ElementShortName">[0][11:0]</obj_property>
+         <obj_property name="ObjectShortName">[0][11:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/rotation_tb/rot_out[1]" type="array">
+         <obj_property name="ElementShortName">[1][11:0]</obj_property>
+         <obj_property name="ObjectShortName">[1][11:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/rotation_tb/rot_out[2]" type="array">
+         <obj_property name="ElementShortName">[2][11:0]</obj_property>
+         <obj_property name="ObjectShortName">[2][11:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject fp_name="/rotation_tb/valid_out" type="logic">
       <obj_property name="ElementShortName">valid_out</obj_property>
@@ -74,9 +103,58 @@
       <obj_property name="ObjectShortName">mult_out[0:2][0:2][22:0]</obj_property>
       <obj_property name="Radix">REALRADIX</obj_property>
       <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
-      <obj_property name="radix_fractionWidth">21</obj_property>
+      <obj_property name="radix_fractionWidth">11</obj_property>
       <obj_property name="radix_otherWidth">0</obj_property>
       <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/rotation_tb/u_rotation/mult_out[0]" type="array">
+         <obj_property name="ElementShortName">[0][0:2][22:0]</obj_property>
+         <obj_property name="ObjectShortName">[0][0:2][22:0]</obj_property>
+         <obj_property name="Radix">REALRADIX</obj_property>
+         <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+         <obj_property name="radix_fractionWidth">11</obj_property>
+         <obj_property name="radix_otherWidth">0</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject fp_name="/rotation_tb/u_rotation/mult_out[0][0]" type="array">
+            <obj_property name="ElementShortName">[0][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[0][22:0]</obj_property>
+            <obj_property name="Radix">REALRADIX</obj_property>
+            <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+            <obj_property name="radix_fractionWidth">11</obj_property>
+            <obj_property name="radix_otherWidth">0</obj_property>
+         </wvobject>
+         <wvobject fp_name="/rotation_tb/u_rotation/mult_out[0][1]" type="array">
+            <obj_property name="ElementShortName">[1][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[1][22:0]</obj_property>
+            <obj_property name="Radix">REALRADIX</obj_property>
+            <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+            <obj_property name="radix_fractionWidth">11</obj_property>
+            <obj_property name="radix_otherWidth">0</obj_property>
+         </wvobject>
+         <wvobject fp_name="/rotation_tb/u_rotation/mult_out[0][2]" type="array">
+            <obj_property name="ElementShortName">[2][22:0]</obj_property>
+            <obj_property name="ObjectShortName">[2][22:0]</obj_property>
+            <obj_property name="Radix">REALRADIX</obj_property>
+            <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+            <obj_property name="radix_fractionWidth">11</obj_property>
+            <obj_property name="radix_otherWidth">0</obj_property>
+         </wvobject>
+      </wvobject>
+      <wvobject fp_name="/rotation_tb/u_rotation/mult_out[1]" type="array">
+         <obj_property name="ElementShortName">[1][0:2][22:0]</obj_property>
+         <obj_property name="ObjectShortName">[1][0:2][22:0]</obj_property>
+         <obj_property name="Radix">REALRADIX</obj_property>
+         <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+         <obj_property name="radix_fractionWidth">11</obj_property>
+         <obj_property name="radix_otherWidth">0</obj_property>
+      </wvobject>
+      <wvobject fp_name="/rotation_tb/u_rotation/mult_out[2]" type="array">
+         <obj_property name="ElementShortName">[2][0:2][22:0]</obj_property>
+         <obj_property name="ObjectShortName">[2][0:2][22:0]</obj_property>
+         <obj_property name="Radix">REALRADIX</obj_property>
+         <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
+         <obj_property name="radix_fractionWidth">11</obj_property>
+         <obj_property name="radix_otherWidth">0</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject fp_name="/rotation_tb/u_rotation/stage" type="array">
       <obj_property name="ElementShortName">stage[0:2][0:2][11:0]</obj_property>
@@ -109,6 +187,18 @@
          <obj_property name="radix_realType">SIGNEDFIXEDPOINTRADIX</obj_property>
          <obj_property name="radix_fractionWidth">10</obj_property>
          <obj_property name="radix_otherWidth">0</obj_property>
+      </wvobject>
+      <wvobject fp_name="/rotation_tb/u_rotation/stage[0]" type="array">
+         <obj_property name="ElementShortName">[0][0:2][11:0]</obj_property>
+         <obj_property name="ObjectShortName">[0][0:2][11:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/rotation_tb/u_rotation/stage[1]" type="array">
+         <obj_property name="ElementShortName">[1][0:2][11:0]</obj_property>
+         <obj_property name="ObjectShortName">[1][0:2][11:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/rotation_tb/u_rotation/stage[2]" type="array">
+         <obj_property name="ElementShortName">[2][0:2][11:0]</obj_property>
+         <obj_property name="ObjectShortName">[2][0:2][11:0]</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="/rotation_tb/points" type="array">

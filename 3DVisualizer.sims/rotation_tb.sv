@@ -59,14 +59,15 @@ module rotation_tb(
         clk = ~clk;
         #5;
     end
-    int fd;
+    int fd = $fopen("C:/Users/mgome/3DVisualizer/tb_points.txt", "w");
+    
     always begin
         $fdisplay(fd, "(%d, %d, %d),\n", rot_out[0], rot_out[1], rot_out[2]);
         #10;
     end
     initial begin
+    $display("file desc: %d", fd);
         valid_in = 0;
-        fd = $fopen("tb_points.txt", "w");
         clk = 1;
         rst = 1;
         #20;
@@ -77,6 +78,7 @@ module rotation_tb(
             rot_in = points[i];
             #10;
         end
+        valid_in = 0;
         #40;
         $fclose(fd);
     end

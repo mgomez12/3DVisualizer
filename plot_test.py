@@ -3,7 +3,49 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
+res = [( -894, -1016, -1148),
 
+(-1013, -1152,   892),
+
+(-1029,  1023, -1021),
+
+(-1148,   888,  1019),
+
+( 1146,  -889, -1020),
+
+( 1027, -1024,  1020),
+
+( 1011,  1151,  -893),
+
+(  892,  1015,  1147),
+
+(  145, -1609,  -734),
+
+(-1609,  -733,  -144),
+
+( -534,    69, -1690),
+
+(   72, -1692,   525),
+
+(-1693,   525,   -65),
+
+(  726,   148, -1611),
+
+(  -73,  1690,  -527),
+
+( 1691,  -527,    63),
+
+( -728,  -150,  1609),
+
+( -147,  1606,   732),
+
+( 1607,   731,   142),
+
+(  532,   -71,  1688)]
+
+r_x = [p[0] for p in res]
+r_y = [p[1] for p in res]
+r_z = [p[2] for p in res]
 
 g = (1 + 5**.5)/2
 l = []
@@ -55,15 +97,9 @@ for i in range (0, 20):
     z[i] = -math.sin(v)*x_orig[i] + math.cos(v)*math.sin(w)*y_orig[i] + math.cos(v)*math.cos(w)*z_orig[i]
 points = ax.scatter(x,y,z)
 fig.canvas.draw_idle()
-plt.pause(.01)
+plt.pause(1)
 
-p = np.array([[-1],[-1],[-1]])
-T = np.array([[1,0,0],[0,math.cos(u), -math.sin(u)], [0, math.sin(u), math.cos(u)]])
-T2 = np.array([[math.cos(v), 0, math.sin(v)], [0, 1, 0], [-math.sin(v), 0, math.cos(v)]])
-first = T@p
-print(T@p)
-print(T2@first)
-print(x, y, z)
+points = ax.scatter(r_x, r_y, r_z)
 
 
 ##while True:
