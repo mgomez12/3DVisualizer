@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module scale #(POINT_WIDTH = 20) (
+module scale #(POINT_WIDTH = 12) (
     input logic clk,
     input logic rst,
     input logic valid_in,

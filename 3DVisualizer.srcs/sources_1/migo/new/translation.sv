@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module translation #(POINT_WIDTH = 20) (
+module translation #(POINT_WIDTH = 12) (
     input logic clk,
     input logic rst,
     input logic valid_in,
@@ -29,7 +29,7 @@ module translation #(POINT_WIDTH = 20) (
     output reg signed [POINT_WIDTH+1:0] translation_out[3],
     output reg valid_out
     );
-    logic signed [POINT_WIDTH+1:0] shift = 3*2048;
+    logic signed [POINT_WIDTH+1:0] shift = (3*2048);
     
     always_ff @(posedge clk) begin
         if (rst) begin
