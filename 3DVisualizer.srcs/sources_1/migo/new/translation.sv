@@ -20,33 +20,27 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module scale #(POINT_WIDTH = 20) (
+module translation #(POINT_WIDTH = 20) (
     input logic clk,
     input logic rst,
     input logic valid_in,
     input logic proj_ready,
-    input signed [POINT_WIDTH-1:0] scale,
-    input signed [POINT_WIDTH-1:0] scale_in[3],
-    output reg signed [POINT_WIDTH-1:0] scale_out[3],
+    input signed [POINT_WIDTH-1:0] translation_in[3],
+    output reg signed [POINT_WIDTH+1:0] translation_out[3],
     output reg valid_out
     );
-    logic signed [2*POINT_WIDTH-2:0] out[3];
-    always_comb begin
-        for (int i = 0; i < 3; i++) begin
-            out[i] = scale_in[i]*scale;
-        end
-    end
+    logic signed [POINT_WIDTH+1:0] shift = 3*2048;
     
     always_ff @(posedge clk) begin
         if (rst) begin
-            scale_out <= '{default:0};
+            translation_out <= '{default:0};
             valid_out <= 0;
         end
         else if (proj_ready) begin
             valid_out <= valid_in;
-            for (int i = 0; i < 3; i++) begin
-                    scale_out[i] <= out[i][2*POINT_WIDTH-2:POINT_WIDTH-1];
-            end
+            translation_out[0] <= translation_in[0];
+            translation_out[1] <= translation_in[1];
+            translation_out[2] <= translation_in[2] + shift;
         end
     end
     

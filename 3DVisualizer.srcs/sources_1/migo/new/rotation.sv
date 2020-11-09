@@ -24,6 +24,7 @@ module rotation #(POINT_WIDTH = 20) (
     input logic clk,
     input logic rst,
     input logic valid_in,
+    input logic proj_ready,
     input signed [POINT_WIDTH-1:0] rot_in[3],
     input signed [POINT_WIDTH-1:0] sin[3], cos[3],
     output signed [POINT_WIDTH-1:0] rot_out[3],
@@ -57,7 +58,7 @@ module rotation #(POINT_WIDTH = 20) (
             stage_valid[0] <= valid_in;
             stage_valid[1:2] <= {1'b0, 1'b0};
         end
-        else begin
+        else if (proj_ready) begin
             stage_valid[0] <= valid_in;
             stage_valid[1] <= stage_valid[0];
             stage_valid[2] <= stage_valid[1];
