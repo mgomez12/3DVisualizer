@@ -3,29 +3,26 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
-res = [( -1024,  -1024,   5120),
-( -1024,  -1024,   7168),
-( -1024,   1024,   5120),
-( -1024,   1024,   7168),
-(  1024,  -1024,   5120),
-(  1024,  -1024,   7168),
-(  1024,   1024,   5120),
-(  1024,   1024,   7168),
-(     0,  -1656,   5512),
-( -1656,   -632,   6144),
-(  -632,      0,   4488),
-(     0,  -1656,   6776),
-( -1656,    632,   6144),
-(   632,      0,   4488),
-(     0,   1656,   5512),
-(  1656,   -632,   6144),
-(  -632,      0,   7800),
-(     0,   1656,   6776),
-(  1656,    632,   6144),
-(   632,      0,   7800),
-(   632,      0,   7800),
-(   632,      0,   7800),
-(   632,      0,   7800)]
+res = [( -1228,  -1638,  -4896),
+(  -877,  -1170,  -1152),
+( -1228,   1638,  -4896),
+(  -877,   1170,  -1152),
+(  1228,  -1638,  -4896),
+(   877,  -1170,  -1152),
+(  1228,   1638,  -4896),
+(   877,   1170,  -1152),
+(     0,  -2461,  -3968),
+( -1656,   -842,  -2720),
+(  -865,      0,  -6752),
+(     0,  -2002,  -1696),
+( -1656,    842,  -2720),
+(   865,      0,  -6752),
+(     0,   2461,  -3968),
+(  1656,   -842,  -2720),
+(  -497,      0,   -384),
+(     0,   2002,  -1696),
+(  1656,    842,  -2720),
+(   497,      0,   -384)]
 
 r_x = [p[0] for p in res]
 r_y = [p[1] for p in res]
@@ -60,7 +57,7 @@ y_orig = np.array(y_orig)
 z_orig = np.array(z_orig)
 points = np.hstack((x_orig, y_orig, z_orig))
 fig = plt.figure()
-ax = plt.axes(projection='3d')
+ax = plt.axes()
 
 u = 0
 v = 0
@@ -69,24 +66,31 @@ x = [0]*20
 y = [0]*20
 z = [0]*20
 plt.ion()
-points = ax.scatter(x_orig, y_orig, z_orig)
+#points = ax.scatter(x_orig, y_orig, z_orig)
+ax.scatter(r_x, r_y)
+ax.set_aspect(3/4)
 ax.set_xlim(-8192, 8192)
 ax.set_ylim(-8192, 8192)
-ax.set_zlim(-8192, 8192)
+#ax.set_zlim(-8192, 8192)
+fig.canvas.draw_idle()
 plt.pause(1)
-u = math.asin(0.0625)
-print(2048*math.cos(u), 2048*math.sin(u))
-v = math.asin(-0.0625)
-w = math.asin(0.0625)
-for i in range (0, 20):
-    x[i] = (math.cos(u) * math.cos(v))*x_orig[i] + (math.cos(u) * math.sin(v)*math.sin(w) - math.sin(u)*math.cos(w))*y_orig[i] + (math.cos(u)*math.sin(v)*math.cos(w)+math.sin(u)*math.sin(w))*z_orig[i]
-    y[i] = (math.sin(u) * math.cos(v))*x_orig[i] + (math.sin(u) * math.sin(v)*math.sin(w) + math.cos(u)*math.cos(w))*y_orig[i] + (math.sin(u)*math.sin(v)*math.cos(w)-math.cos(u)*math.sin(w))*z_orig[i]
-    z[i] = -math.sin(v)*x_orig[i] + math.cos(v)*math.sin(w)*y_orig[i] + math.cos(v)*math.cos(w)*z_orig[i]
-##points = ax.scatter(x,y,z)
-##fig.canvas.draw_idle()
-plt.pause(1)
-
-points = ax.scatter(r_x, r_y, r_z)
+##ax.set_xlim(-8192, 8192)
+##ax.set_ylim(-8192, 8192)
+##ax.set_zlim(-8192, 8192)
+##plt.pause(1)
+##u = math.asin(0.0625)
+##print(2048*math.cos(u), 2048*math.sin(u))
+##v = math.asin(-0.0625)
+##w = math.asin(0.0625)
+##for i in range (0, 20):
+##    x[i] = (math.cos(u) * math.cos(v))*x_orig[i] + (math.cos(u) * math.sin(v)*math.sin(w) - math.sin(u)*math.cos(w))*y_orig[i] + (math.cos(u)*math.sin(v)*math.cos(w)+math.sin(u)*math.sin(w))*z_orig[i]
+##    y[i] = (math.sin(u) * math.cos(v))*x_orig[i] + (math.sin(u) * math.sin(v)*math.sin(w) + math.cos(u)*math.cos(w))*y_orig[i] + (math.sin(u)*math.sin(v)*math.cos(w)-math.cos(u)*math.sin(w))*z_orig[i]
+##    z[i] = -math.sin(v)*x_orig[i] + math.cos(v)*math.sin(w)*y_orig[i] + math.cos(v)*math.cos(w)*z_orig[i]
+####points = ax.scatter(x,y,z)
+####fig.canvas.draw_idle()
+##plt.pause(1)
+##
+##points = ax.scatter(r_x, r_y, rz)
 
 
 ##while True:

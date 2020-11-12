@@ -61,6 +61,18 @@ module projection_tb(
         clk = 1;
         #5;
     end
+    int fd = $fopen("C:/Users/mgome/3DVisualizer/tb_points.txt", "w");
+    int ct = 0;
+    
+    always begin
+        #10;
+        if (valid_out) begin
+            ct = ct + 1;
+            $fdisplay(fd, "(%d, %d, %d),", projection_out[0], projection_out[1], projection_out[2]);
+            if (ct == 20) $finish;
+        end
+    end
+    
     initial begin
         projection_in = {12'b0, 12'b0, 12'b0};
         rst = 1;
@@ -74,8 +86,6 @@ module projection_tb(
             if (proj_ready) i++;
         end
         valid_in = 0;
-        #200;
-        $finish;
     end
         
 endmodule

@@ -24,8 +24,8 @@ module projection #(POINT_WIDTH = 14) (
     input logic clk,
     input logic rst,
     input logic valid_in,
-    input signed [POINT_WIDTH-1:0] projection_in[3],
-    output reg signed [POINT_WIDTH-1:0] projection_out[3],
+    input signed [POINT_WIDTH-1:0] proj_in[3],
+    output reg signed [POINT_WIDTH-1:0] proj_out[3],
     output reg valid_out,
     output logic proj_ready
     );
@@ -42,9 +42,9 @@ module projection #(POINT_WIDTH = 14) (
     logic out_valid[3];
     logic signed [POINT_WIDTH-1:0] out[3];
     logic signed [2*POINT_WIDTH-2:0] big_divisor;
-    assign big_divisor = aspect * projection_in[2]; //12 fraction bits
+    assign big_divisor = aspect * proj_in[2]; //12 fraction bits
     
-    wire signed[POINT_WIDTH-1: 0] divisor0_in = {big_divisor[2*POINT_WIDTH-2], big_divisor[2*POINT_WIDTH-4:POINT_WIDTH-2]};
+    wire signed[POINT_WIDTH: 0] divisor0_in = big_divisor[2*POINT_WIDTH-2:POINT_WIDTH-2];
     
     logic all_taken;
     assign all_taken = divisor_taken[0] & divisor_taken[1] & divisor_taken[2] & dividend_taken[0] & dividend_taken[1] & dividend_taken[2];
@@ -56,22 +56,22 @@ module projection #(POINT_WIDTH = 14) (
     
     div_gen_0 x_div (.aclk(clk), .s_axis_divisor_tvalid(divisor_valid[0]), 
                     .s_axis_divisor_tready(divisor_ready[0]), .s_axis_divisor_tdata(divisor0_in), .s_axis_dividend_tvalid(dividend_valid[0]), 
-                    .s_axis_dividend_tready(dividend_ready[0]), .s_axis_dividend_tdata(projection_in[0]), .m_axis_dout_tvalid(out_valid[0]), 
+                    .s_axis_dividend_tready(dividend_ready[0]), .s_axis_dividend_tdata(proj_in[0]), .m_axis_dout_tvalid(out_valid[0]), 
                     .m_axis_dout_tdata(out[0]), .m_axis_dout_tready(out_ready));
 
     div_gen_0 y_div (.aclk(clk), .s_axis_divisor_tvalid(divisor_valid[1]), 
-                    .s_axis_divisor_tready(divisor_ready[1]), .s_axis_divisor_tdata(projection_in[2]), .s_axis_dividend_tvalid(dividend_valid[1]), 
-                    .s_axis_dividend_tready(dividend_ready[1]), .s_axis_dividend_tdata(projection_in[1]), .m_axis_dout_tvalid(out_valid[1]), 
+                    .s_axis_divisor_tready(divisor_ready[1]), .s_axis_divisor_tdata({proj_in[2][POINT_WIDTH-1],proj_in[2]}), .s_axis_dividend_tvalid(dividend_valid[1]), 
+                    .s_axis_dividend_tready(dividend_ready[1]), .s_axis_dividend_tdata(proj_in[1]), .m_axis_dout_tvalid(out_valid[1]), 
                     .m_axis_dout_tdata(out[1]), .m_axis_dout_tready(out_ready));
                     
     div_gen_0 z_div (.aclk(clk), .s_axis_divisor_tvalid(divisor_valid[2]), 
-                    .s_axis_divisor_tready(divisor_ready[2]), .s_axis_divisor_tdata(projection_in[2]), .s_axis_dividend_tvalid(dividend_valid[2]), 
+                    .s_axis_divisor_tready(divisor_ready[2]), .s_axis_divisor_tdata({proj_in[2][POINT_WIDTH-1],proj_in[2]}), .s_axis_dividend_tvalid(dividend_valid[2]), 
                     .s_axis_dividend_tready(dividend_ready[2]), .s_axis_dividend_tdata(dividend2_in), .m_axis_dout_tvalid(out_valid[2]), 
                     .m_axis_dout_tdata(out[2]), .m_axis_dout_tready(out_ready));
     
     always_ff @(posedge clk) begin
         if (rst) begin
-            projection_out <= '{default:0};
+            proj_out <= '{default:0};
             valid_out <= 0;
             divisor_taken <= '{default:1};
             dividend_taken <= '{default:1};
@@ -93,9 +93,9 @@ module projection #(POINT_WIDTH = 14) (
             end else if (out_ready) begin
                 out_ready <= 0;
                 valid_out <= 1;
-                projection_out[0] <= out[0];
-                projection_out[1] <= out[1];
-                projection_out[2] <= (3 <<< 13)- {out[2], 5'b0};
+                proj_out[0] <= out[0];
+                proj_out[1] <= out[1];
+                proj_out[2] <= (3 <<< 13)- {out[2], 5'b0};
             end else begin
                 valid_out <= 0;
             end

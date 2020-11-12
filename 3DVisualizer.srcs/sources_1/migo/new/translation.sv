@@ -25,22 +25,22 @@ module translation #(POINT_WIDTH = 12) (
     input logic rst,
     input logic valid_in,
     input logic proj_ready,
-    input signed [POINT_WIDTH-1:0] translation_in[3],
-    output reg signed [POINT_WIDTH+1:0] translation_out[3],
+    input signed [POINT_WIDTH-1:0] trans_in[3],
+    output reg signed [POINT_WIDTH+1:0] trans_out[3],
     output reg valid_out
     );
     logic signed [POINT_WIDTH+1:0] shift = (3*2048);
     
     always_ff @(posedge clk) begin
         if (rst) begin
-            translation_out <= '{default:0};
+            trans_out <= '{default:0};
             valid_out <= 0;
         end
         else if (proj_ready) begin
             valid_out <= valid_in;
-            translation_out[0] <= translation_in[0];
-            translation_out[1] <= translation_in[1];
-            translation_out[2] <= translation_in[2] + shift;
+            trans_out[0] <= trans_in[0];
+            trans_out[1] <= trans_in[1];
+            trans_out[2] <= trans_in[2] + shift;
         end
     end
     
