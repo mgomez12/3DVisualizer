@@ -48,7 +48,7 @@ module projection #(POINT_WIDTH = 14) (
     
     logic all_taken;
     assign all_taken = divisor_taken[0] & divisor_taken[1] & divisor_taken[2] & dividend_taken[0] & dividend_taken[1] & dividend_taken[2];
-    assign proj_ready = all_taken;
+    assign proj_ready = all_taken | !valid_in;
     logic signed [POINT_WIDTH-1:0] far = 2048;
     logic signed [POINT_WIDTH-1:0] near = 1024;
     wire signed [2*POINT_WIDTH-2:0] big_dividend2 = (near * far) >>> 13 ; //cut off 4 extra bits, need to multiply at end
@@ -83,8 +83,8 @@ module projection #(POINT_WIDTH = 14) (
             end
             else begin
                 for (int i = 0; i < 3; i++) begin
-                    divisor_taken[i] <= (divisor_ready[i] && divisor_valid[i]) | divisor_taken[i];
-                    dividend_taken[i] <= (dividend_ready[i] && dividend_valid[i]) | dividend_taken[i];
+                    divisor_taken[i] <= (divisor_ready[i] && divisor_valid[i]) | divisor_taken[i] ;
+                    dividend_taken[i] <= (dividend_ready[i] && dividend_valid[i]) | dividend_taken[i] ;
                 end
             end
             

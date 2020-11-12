@@ -3,30 +3,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 import math
 
-res = [( -1228,  -1638,  -4896),
-(  -877,  -1170,  -1152),
-( -1228,   1638,  -4896),
-(  -877,   1170,  -1152),
-(  1228,  -1638,  -4896),
-(   877,  -1170,  -1152),
-(  1228,   1638,  -4896),
-(   877,   1170,  -1152),
-(     0,  -2461,  -3968),
-( -1656,   -842,  -2720),
-(  -865,      0,  -6752),
-(     0,  -2002,  -1696),
-( -1656,    842,  -2720),
-(   865,      0,  -6752),
-(     0,   2461,  -3968),
-(  1656,   -842,  -2720),
-(  -497,      0,   -384),
-(     0,   2002,  -1696),
-(  1656,    842,  -2720),
-(   497,      0,   -384)]
+from tb_points import points
+series = []
+for i in range(30):
+        series.append(points[i*20:(i+1)*20])
 
-r_x = [p[0] for p in res]
-r_y = [p[1] for p in res]
-r_z = [p[2] for p in res]
 
 g = (1 + 5**.5)/2
 l = []
@@ -66,8 +47,7 @@ x = [0]*20
 y = [0]*20
 z = [0]*20
 plt.ion()
-#points = ax.scatter(x_orig, y_orig, z_orig)
-ax.scatter(r_x, r_y)
+points = ax.scatter(x_orig, y_orig)
 ax.set_aspect(3/4)
 ax.set_xlim(-8192, 8192)
 ax.set_ylim(-8192, 8192)
@@ -93,19 +73,14 @@ plt.pause(1)
 ##points = ax.scatter(r_x, r_y, rz)
 
 
-##while True:
-##    for t in range(10):
+for t in range(30):
 ##        for i in range (0, 20):
 ##            x[i] = (math.cos(u) * math.cos(v))*x_orig[i] + (math.cos(u) * math.sin(v)*math.sin(w) - math.sin(u)*math.cos(w))*y_orig[i] + (math.cos(u)*math.sin(v)*math.cos(w)+math.sin(u)*math.sin(w))*z_orig[i]
 ##            y[i] = (math.sin(u) * math.cos(v))*x_orig[i] + (math.sin(u) * math.sin(v)*math.sin(w) + math.cos(u)*math.cos(w))*y_orig[i] + (math.sin(u)*math.sin(v)*math.cos(w)-math.cos(u)*math.sin(w))*z_orig[i]
 ##            z[i] = -math.sin(v)*x_orig[i] + math.cos(v)*math.sin(w)*y_orig[i] + math.cos(v)*math.cos(w)*z_orig[i]
-##        points.remove()
-##        points = ax.scatter(x,y,z)
-##        fig.canvas.draw_idle()
-##        plt.pause(.01)
-##        u += u_rate*pi*.02
-##        v += v_rate*pi*.02
-##        w += w_rate*pi*.02
-##    u_rate = 2*np.random.random()-1
-##    v_rate = 2*np.random.random()-1
-##    w_rate = 2*np.random.random()-1
+        x = [series[t][i][0] for i in range(20)]
+        y = [series[t][i][1] for i in range(20)]
+        points.remove()
+        points = ax.scatter(x,y)
+        fig.canvas.draw_idle()
+        plt.pause(.01)

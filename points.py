@@ -24,7 +24,7 @@ s = []
 for p in a:
     x = [bin(p[0] & 0xfff)[2:], bin(p[1] & 0xfff)[2:], bin(p[2] & 0xfff)[2:]]
     for i in range(3):
-        x[i] = x[i] + "0"*(12-len(x[i]))
+        x[i] = "0"*(12-len(x[i])) + x[i]
     s.append(''.join(x))
 print(s)
 with open("points.coe", "w") as g:

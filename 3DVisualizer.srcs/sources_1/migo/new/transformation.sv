@@ -37,7 +37,9 @@ module transformation #(POINT_WIDTH = 12, NUM_POINTS=20)(
   logic signed [POINT_WIDTH-1:0] rot_in[3], scale_in[3], trans_in[3];
   logic signed [POINT_WIDTH+1:0] proj_in[3];
   assign {>>{rot_in}} = point;
-  logic proj_ready;
+  wire proj_ready;
+  logic  start_delay;
+  logic [1:0] mem_delay;
 
   rotation #(.POINT_WIDTH(POINT_WIDTH)) u_rotation (.valid_in(rot_valid), .rot_out(scale_in), .valid_out(scale_valid), .*);
   scale #(.POINT_WIDTH(POINT_WIDTH)) u_scale (.valid_in(scale_valid), .scale_out(trans_in), .valid_out(trans_valid), .*);
@@ -50,23 +52,39 @@ module transformation #(POINT_WIDTH = 12, NUM_POINTS=20)(
         sin <= '{default:0};
         cos <= '{default:0};
         addr <= 19;
-        rot_valid <= '0;
+        working <= 0;
+        start_delay <= '0;
+        mem_delay <= '0;
       end
       else begin
         if (valid && !working) begin
             working <= 1;
+            addr <= 0;
             sin <= sin_in;
             cos <= cos_in;
-        end else begin
-            if (addr == 19) begin
-                rot_valid <= 0;
+            start_delay <= 0;
+            mem_delay <= '0;
+        end else if (working) begin
+            if (start_delay ==0) begin
+                start_delay <= 1;
+            end
+            if (mem_delay != 2) begin
+                mem_delay <= mem_delay +1;
+            end else if (addr == 19 && proj_ready) begin
                 working <= 0;
             end else begin
-                rot_valid <= proj_ready;
-                addr <= (proj_ready ? addr + 1 : addr);
+                if (proj_ready) begin
+                    addr <= addr + 1;
+                    mem_delay <= 0;
+                end
             end
-        end
+         end
       end
+    end
+   
+   always_comb begin
+       rot_valid = (working && mem_delay == 2);
    end
+
     
 endmodule
