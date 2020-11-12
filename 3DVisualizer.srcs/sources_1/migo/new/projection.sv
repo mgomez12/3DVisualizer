@@ -41,16 +41,18 @@ module projection #(POINT_WIDTH = 14) (
     logic out_ready;
     logic out_valid[3];
     logic signed [POINT_WIDTH-1:0] out[3];
-    logic signed [2*POINT_WIDTH-2:0] big_divisor = aspect * projection_in[2]; //12 fraction bits
+    logic signed [2*POINT_WIDTH-2:0] big_divisor;
+    assign big_divisor = aspect * projection_in[2]; //12 fraction bits
     
-    logic signed[POINT_WIDTH-1: 0] divisor0_in = {big_divisor[2*POINT_WIDTH-2], big_divisor[2*POINT_WIDTH-4:POINT_WIDTH-2]};
+    wire signed[POINT_WIDTH-1: 0] divisor0_in = {big_divisor[2*POINT_WIDTH-2], big_divisor[2*POINT_WIDTH-4:POINT_WIDTH-2]};
     
-    logic all_taken = divisor_taken[0] & divisor_taken[1] & divisor_taken[2] & dividend_taken[0] & dividend_taken[1] & dividend_taken[2];
+    logic all_taken;
+    assign all_taken = divisor_taken[0] & divisor_taken[1] & divisor_taken[2] & dividend_taken[0] & dividend_taken[1] & dividend_taken[2];
     assign proj_ready = all_taken;
     logic signed [POINT_WIDTH-1:0] far = 2048;
     logic signed [POINT_WIDTH-1:0] near = 1024;
-    logic signed [2&POINT_WIDTH-2:0] big_dividend2 = (near * far) >>> 13 ; //cut off 4 extra bits, need to multiply at end
-    logic signed [POINT_WIDTH-1:0] dividend2_in = big_dividend2[POINT_WIDTH-1:0];
+    wire signed [2*POINT_WIDTH-2:0] big_dividend2 = (near * far) >>> 13 ; //cut off 4 extra bits, need to multiply at end
+    wire signed [POINT_WIDTH-1:0] dividend2_in = big_dividend2[POINT_WIDTH-1:0];
     
     div_gen_0 x_div (.aclk(clk), .s_axis_divisor_tvalid(divisor_valid[0]), 
                     .s_axis_divisor_tready(divisor_ready[0]), .s_axis_divisor_tdata(divisor0_in), .s_axis_dividend_tvalid(dividend_valid[0]), 
@@ -71,8 +73,9 @@ module projection #(POINT_WIDTH = 14) (
         if (rst) begin
             projection_out <= '{default:0};
             valid_out <= 0;
-            divisor_taken <= '{default:0};
-            dividend_taken <= '{default:0};
+            divisor_taken <= '{default:1};
+            dividend_taken <= '{default:1};
+            out_ready <= 0;
         end else begin
             if (all_taken) begin
                 divisor_taken <= '{default:0};
@@ -80,8 +83,8 @@ module projection #(POINT_WIDTH = 14) (
             end
             else begin
                 for (int i = 0; i < 3; i++) begin
-                    divisor_taken[i] <= (divisor_ready[i] & divisor_valid[i]) | divisor_taken[i];
-                    dividend_taken[1] <= (dividend_ready[1] & dividend_valid[1]) | dividend_taken[1];
+                    divisor_taken[i] <= (divisor_ready[i] && divisor_valid[i]) | divisor_taken[i];
+                    dividend_taken[i] <= (dividend_ready[i] && dividend_valid[i]) | dividend_taken[i];
                 end
             end
             

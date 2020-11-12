@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="projection_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="projection_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="38149fs"></ZoomEndTime>
+      <Cursor1Time time="25643fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="300"></NameColumnWidth>
+      <ValueColumnWidth column_width="127"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="18" />
+   <wvobject fp_name="/projection_tb/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/projection_tb/rst" type="logic">
+      <obj_property name="ElementShortName">rst</obj_property>
+      <obj_property name="ObjectShortName">rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="/projection_tb/valid_in" type="logic">
+      <obj_property name="ElementShortName">valid_in</obj_property>
+      <obj_property name="ObjectShortName">valid_in</obj_property>
+   </wvobject>
+   <wvobject fp_name="/projection_tb/proj_ready" type="logic">
+      <obj_property name="ElementShortName">proj_ready</obj_property>
+      <obj_property name="ObjectShortName">proj_ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/projection_tb/i" type="array">
+      <obj_property name="ElementShortName">i[31:0]</obj_property>
+      <obj_property name="ObjectShortName">i[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/projection_tb/u_projection/divisor_taken" type="array">
+      <obj_property name="ElementShortName">divisor_taken[0:2]</obj_property>
+      <obj_property name="ObjectShortName">divisor_taken[0:2]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/projection_tb/u_projection/dividend_taken" type="array">
+      <obj_property name="ElementShortName">dividend_taken[0:2]</obj_property>
+      <obj_property name="ObjectShortName">dividend_taken[0:2]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/projection_tb/u_projection/divisor_ready" type="array">
+      <obj_property name="ElementShortName">divisor_ready[0:2]</obj_property>
+      <obj_property name="ObjectShortName">divisor_ready[0:2]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/projection_tb/u_projection/dividend_ready" type="array">
+      <obj_property name="ElementShortName">dividend_ready[0:2]</obj_property>
+      <obj_property name="ObjectShortName">dividend_ready[0:2]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/projection_tb/u_projection/divisor_valid" type="array">
+      <obj_property name="ElementShortName">divisor_valid[0:2]</obj_property>
+      <obj_property name="ObjectShortName">divisor_valid[0:2]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/projection_tb/u_projection/dividend_valid" type="array">
+      <obj_property name="ElementShortName">dividend_valid[0:2]</obj_property>
+      <obj_property name="ObjectShortName">dividend_valid[0:2]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/projection_tb/u_projection/out_valid" type="array">
+      <obj_property name="ElementShortName">out_valid[0:2]</obj_property>
+      <obj_property name="ObjectShortName">out_valid[0:2]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/projection_tb/u_projection/out" type="array">
+      <obj_property name="ElementShortName">out[0:2][13:0]</obj_property>
+      <obj_property name="ObjectShortName">out[0:2][13:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/projection_tb/u_projection/x_div/s_axis_dividend_tready" type="logic">
+      <obj_property name="ElementShortName">s_axis_dividend_tready</obj_property>
+      <obj_property name="ObjectShortName">s_axis_dividend_tready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/projection_tb/u_projection/x_div/s_axis_divisor_tready" type="logic">
+      <obj_property name="ElementShortName">s_axis_divisor_tready</obj_property>
+      <obj_property name="ObjectShortName">s_axis_divisor_tready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/projection_tb/u_projection/x_div/m_axis_dout_tready" type="logic">
+      <obj_property name="ElementShortName">m_axis_dout_tready</obj_property>
+      <obj_property name="ObjectShortName">m_axis_dout_tready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/projection_tb/projection_out" type="array">
+      <obj_property name="ElementShortName">projection_out[0:2][13:0]</obj_property>
+      <obj_property name="ObjectShortName">projection_out[0:2][13:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/projection_tb/projection_in" type="array">
+      <obj_property name="ElementShortName">projection_in[0:2][13:0]</obj_property>
+      <obj_property name="ObjectShortName">projection_in[0:2][13:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+   </wvobject>
+</wave_config>
