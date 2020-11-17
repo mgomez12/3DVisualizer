@@ -30,7 +30,7 @@ module transformation_tb(
     logic valid_out;
     logic signed [11:0] scale;
     logic signed [11:0] sin_in[3], cos_in[3];
-    logic signed [13:0] point_out[3];
+    logic [9:0] point_out[3];
     logic [31:0] cycle_count;
     wire signed [11:0] cos[30][3] = {{12'd2048, 12'd2048, 12'd2048},
                     {12'd2036, 12'd2036, 12'd2036},

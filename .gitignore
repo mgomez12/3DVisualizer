@@ -1,4 +1,4 @@
 3DVisualizer/*
-
+__pycache*
 3DVisualizer.srcs/sources_1/*/ip/*/*
 !3DVisualizer.srcs/sources_1/*/ip/*/*.xci
