@@ -30,6 +30,11 @@ module graphics_top(
    output logic vga_hs,
    output logic vga_vs
     );
+    logic [12:0] color;
+    logic pulse;
+    logic [25:0] sample_beat;
+    assign pulse = sample_beat == 26'd46875000;
+    
     logic clk_25mhz;
     logic locked;
     logic [9:0]hcount;
@@ -72,17 +77,37 @@ module graphics_top(
     
     ila_0 ila(.clk(clk_25mhz), .probe0(hcount_del[1]), .probe1(vcount_del[1]), .probe2(hsync_del[1]), .probe3(vsync_del[1]), .probe5(addr_delete), .probe4(pixel));
     ila_1 ila2(.clk(clk_100mhz), .probe0(sin[0]), .probe1(hcount_delay), .probe2(write_en), .probe3(begin_calculating), .probe4(point_coord[0]),
-               .probe5(point_coord[1]), .probe6(vcount_new), .probe7(valid_point), .probe8(vsync_converted), .probe9(test_point));
+               .probe5(point_coord[1]), .probe6(vcount_new), .probe7(valid_point), .probe8(vsync_converted), .probe9(sample_beat));
     clk_wiz_0 clk_25 (.clk_out1(clk_25mhz), .reset(btnu), .locked(locked), .clk_in1(clk_100mhz));
     xvga u_xvga(.vclock_in(clk_25mhz),.hcount_out(hcount), .vcount_out(vcount), .vsync_out(vsync), .hsync_out(hsync), .blank_out(blank));
     transformation #(.POINT_WIDTH(12), .NUM_POINTS(20)) u_transformation (.clk(clk_100mhz), .valid(begin_calculating), .rst(btnu), .scale(12'b011111111111), .sin_in(sin),
                    .cos_in(cos), .point_out(point_coord), .valid_out(valid_point));
-    blk_mem_gen_1 pixels0(.clka(clk_100mhz), .wea(write_en[0]), .addra(addr_wr), .dina(12'h0f0), .clkb(clk_25mhz), 
+    blk_mem_gen_1 pixels0(.clka(clk_100mhz), .wea(write_en[0]), .addra(addr_wr), .dina(color), .clkb(clk_25mhz), 
                           .web(delete_en[0]), .addrb(addr_delete), .dinb('0), .doutb(pixel_out[0]));
                           
-    blk_mem_gen_1 pixels1(.clka(clk_100mhz), .wea(write_en[1]), .addra(addr_wr), .dina(12'h0f0), .clkb(clk_25mhz), 
+    blk_mem_gen_1 pixels1(.clka(clk_100mhz), .wea(write_en[1]), .addra(addr_wr), .dina(color), .clkb(clk_25mhz), 
                           .web(delete_en[1]), .addrb(addr_delete), .dinb('0), .doutb(pixel_out[1]));
-    angle_gen u_angle(.vsync(vsync_converted), .clk(clk_100mhz), .rst(btnu), .sin_out(sin), .cos_out(cos));
+    angle_gen u_angle(.vsync(vsync_converted), .clk(clk_100mhz), .rst(btnu), .sin_out(sin), .cos_out(cos), .pulse(pulse));
+    
+    always_ff @(posedge clk_100mhz) begin
+        if (btnu) begin
+            color <= 'hfff;
+            sample_beat <= 0;
+        end else begin
+            sample_beat <= (sample_beat == 26'd46875000 ? 0 : sample_beat + 1);
+            if (pulse) begin
+                case (color)
+                    'hfff: color <= 'h00f;
+                    'h00f: color <= 'h0ff;
+                    'h0ff: color <= 'h0f0;
+                    'h0f0: color <= 'hff0;
+                    'hff0: color <= 'hf00;
+                    'hf00: color <= 'hf0f;
+                    'hf0f: color <= 'hfff;
+                endcase
+            end
+        end
+    end
 
 
     always_comb begin
