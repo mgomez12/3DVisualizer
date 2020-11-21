@@ -75,10 +75,7 @@ module graphics_top(
     logic [11:0] test_point;
     logic signed [11:0] sin[3], cos[3];
     
-    ila_0 ila(.clk(clk_25mhz), .probe0(hcount_del[1]), .probe1(vcount_del[1]), .probe2(hsync_del[1]), .probe3(vsync_del[1]), .probe5(addr_delete), .probe4(pixel));
-    ila_1 ila2(.clk(clk_100mhz), .probe0(sin[0]), .probe1(hcount_delay), .probe2(write_en), .probe3(begin_calculating), .probe4(point_coord[0]),
-               .probe5(point_coord[1]), .probe6(vcount_new), .probe7(valid_point), .probe8(vsync_converted), .probe9(sample_beat));
-    clk_wiz_0 clk_25 (.clk_out1(clk_25mhz), .reset(btnu), .locked(locked), .clk_in1(clk_100mhz));
+   clk_wiz_0 clk_25 (.clk_out1(clk_25mhz), .reset(btnu), .locked(locked), .clk_in1(clk_100mhz));
     xvga u_xvga(.vclock_in(clk_25mhz),.hcount_out(hcount), .vcount_out(vcount), .vsync_out(vsync), .hsync_out(hsync), .blank_out(blank));
     transformation #(.POINT_WIDTH(12), .NUM_POINTS(20)) u_transformation (.clk(clk_100mhz), .valid(begin_calculating), .rst(btnu), .scale(12'b011111111111), .sin_in(sin),
                    .cos_in(cos), .point_out(point_coord), .valid_out(valid_point));
