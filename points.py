@@ -1,15 +1,10 @@
-g = (1 + 5**.5)/2
+import random
+import math
 l = []
-h = 1/g
-for i in [-1,1]:
-	for j in [-1,1]:
-		for k in [-1,1]:
-			l.append((i,j,k))
-
-for i in [-(1+h), 1+h]:
-	for j in [-(1-h**2), 1-h**2]:
-		for p in [(0, i, j), (i, j, 0), (j, 0, i)]:
-			l.append(p)
+for n in range(300):
+        z = random.random()*4-2
+        rho = random.random()*2*3.14159265
+        l.append((math.sqrt(4-z**2)*math.cos(rho), math.sqrt(4-z**2)*math.sin(rho), z))
 print(l)
 
 a = []

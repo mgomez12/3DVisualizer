@@ -29,7 +29,7 @@ module translation #(POINT_WIDTH = 12) (
     output reg signed [POINT_WIDTH+1:0] trans_out[3],
     output reg valid_out
     );
-    logic signed [POINT_WIDTH+1:0] shift = (2*2048);
+    logic signed [POINT_WIDTH+1:0] shift = (3700);
     
     always_ff @(posedge clk) begin
         if (rst) begin

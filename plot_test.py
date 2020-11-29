@@ -4,41 +4,23 @@ import matplotlib.pyplot as plt
 import math
 
 from tb_points import points
-series = []
-for i in range(30):
-        series.append(points[i*20:(i+1)*20])
-
-
 g = (1 + 5**.5)/2
 l = []
 h = 1/g
-for i in [-1,1]:
-	for j in [-1,1]:
-		for k in [-1,1]:
-			l.append((i,j,k))
-
-for i in [-(1+h), 1+h]:
-	for j in [-(1-h**2), 1-h**2]:
-		for p in [(0, i, j), (i, j, 0), (j, 0, i)]:
-			l.append(p)
-
-x_orig = []
-y_orig = []
-z_orig = []
-pi=3.1415926
 u_rate = .1
 v_rate = .3
 w_rate = .2
-for p in l:
-    x_orig.append(int( p[0] *2048/2))
-    y_orig.append(int( p[1] *2048/2))
-    z_orig.append(int( p[2] *2048/2))
+x_orig, y_orig, z_orig = [], [], []
+for p in points:
+    x_orig.append(p[0])
+    y_orig.append(p[1])
+    z_orig.append(p[2])
 x_orig = np.array(x_orig)
 y_orig = np.array(y_orig)
 z_orig = np.array(z_orig)
 points = np.hstack((x_orig, y_orig, z_orig))
 fig = plt.figure()
-ax = plt.axes()
+ax = plt.axes(projection='3d')
 
 u = 0
 v = 0
@@ -47,10 +29,7 @@ x = [0]*20
 y = [0]*20
 z = [0]*20
 plt.ion()
-points = ax.scatter(x_orig, y_orig)
-ax.set_aspect(3/4)
-ax.set_xlim(0, 640)
-ax.set_ylim(0, 480)
+points = ax.scatter(x_orig, y_orig, z_orig)
 #ax.set_zlim(-8192, 8192)
 fig.canvas.draw_idle()
 plt.pause(1)
