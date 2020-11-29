@@ -78,7 +78,7 @@ module graphics_top(
     
    clk_wiz_0 clk_25 (.clk_out1(clk_25mhz), .reset(btnu), .locked(locked), .clk_in1(clk_100mhz));
     xvga u_xvga(.vclock_in(clk_25mhz),.hcount_out(hcount), .vcount_out(vcount), .vsync_out(vsync), .hsync_out(hsync), .blank_out(blank));
-    transformation #(.POINT_WIDTH(12), .NUM_POINTS(200)) u_transformation (.clk(clk_100mhz), .valid(begin_calculating), .rst(btnu), .scale(scale), .sin_in(sin),
+    transformation #(.POINT_WIDTH(12), .NUM_POINTS(300)) u_transformation (.clk(clk_100mhz), .valid(begin_calculating), .rst(btnu), .scale(scale), .sin_in(sin),
                    .cos_in(cos), .point_out(point_coord), .valid_out(valid_point));
     blk_mem_gen_1 pixels0(.clka(clk_100mhz), .wea(write_en[0]), .addra(addr_wr), .dina(color), .clkb(clk_25mhz), 
                           .web(delete_en[0]), .addrb(addr_delete), .dinb('0), .doutb(pixel_out[0]));
