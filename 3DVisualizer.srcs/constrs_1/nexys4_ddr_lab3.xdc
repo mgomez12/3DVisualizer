@@ -1,5 +1,5 @@
 ## all inputs/outputs changed to lowercase; arrays start with zero. 2019-08-25
-## system clock renamed to clk_100mhz
+## system clock renamed to clk_100mhz aldjfasdtest
 ## ja, jb, jc, jd renamed to 0-7
 ## xa port renamed 0-3
 
