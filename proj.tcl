@@ -50,6 +50,8 @@
 #    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/projection_tb_behav.wcfg"
 #    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/transformation_tb.sv"
 #    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/graphics_top.sv"
+#    "C:/Users/Nancy\ Vargas/3DVisualizer/3DVisualizer.srcs/sources_1/nancy/new/sd_controller.sv"
+#    "C:/Users/Nancy\ Vargas/3DVisualizer/3DVisualizer.srcs/sources_1/nancy/new/sd_top.sv"
 #
 #*****************************************************************************************
 
@@ -168,6 +170,8 @@ set files [list \
  [file normalize "${origin_dir}/3DVisualizer.srcs/sources_1/migo/new/graphics_top.sv"] \
  [file normalize "${origin_dir}/3DVisualizer.srcs/sources_1/migo/ip/clk_wiz_0/clk_wiz_0.xci"] \
  [file normalize "${origin_dir}/3DVisualizer.srcs/sources_1/migo/new/angle_gen.sv"] \
+ [file normalize "${origin_dir}/3DVisualizer.srcs/sources_1/nancy/new/sd_controller.sv"] \
+ [file normalize "${origin_dir}/3DVisualizer.srcs/sources_1/nancy/new/sd_top.sv"] \
 ]
 add_files -norecurse -fileset $obj $files
 
