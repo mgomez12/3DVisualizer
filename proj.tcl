@@ -27,6 +27,7 @@
 #
 # 3. The following remote source files that were added to the original project:-
 #
+<<<<<<< HEAD
 #    "C:/Users/Nancy Vargas/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/rotation.sv"
 #    "C:/Users/Nancy Vargas/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/transformation.sv"
 #    "C:/Users/Nancy Vargas/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/points.coe"
@@ -45,6 +46,33 @@
 #    "C:/Users/Nancy Vargas/3DVisualizer/3DVisualizer.srcs/sources_1/nancy/new/sd_top.sv"
 #    "C:/Users/Nancy Vargas/3DVisualizer/3DVisualizer.srcs/sources_1/nancy/new/sd_controller.sv"
 #    "C:/Users/Nancy Vargas/3DVisualizer/3DVisualizer.srcs/constrs_1/nexys4_ddr_lab3.xdc"
+=======
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/rotation.sv"
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/transformation.sv"
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/points.coe"
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/scale.sv"
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/translation.sv"
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/projection.sv"
+#    "C:/Users/mgome/3DVisualizer/points.coe"
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/xvga.sv"
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/graphics_top.sv"
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/ip/clk_wiz_0/clk_wiz_0.xci"
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/angle_gen.sv"
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/ip/div_gen_0/div_gen_0.xci"
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/ip/blk_mem_gen_1/blk_mem_gen_1.xci"
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/ip/blk_mem_gen_0/blk_mem_gen_0.xci"
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/constrs_1/nexys4_ddr_lab3.xdc"
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/rotation_tb_behav.wcfg"
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/scaling_tb.sv"
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/rotation_tb.sv"
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/translation_tb.sv"
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/projection_tb.sv"
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/projection_tb_behav.wcfg"
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/transformation_tb.sv"
+#    "C:/Users/mgome/3DVisualizer/3DVisualizer.srcs/sources_1/migo/new/graphics_top.sv"
+#    "C:/Users/Nancy\ Vargas/3DVisualizer/3DVisualizer.srcs/sources_1/nancy/new/sd_controller.sv"
+#    "C:/Users/Nancy\ Vargas/3DVisualizer/3DVisualizer.srcs/sources_1/nancy/new/sd_top.sv"
+>>>>>>> a5e9891b9b3250071dd76a9acf9fa242e1f9fa6d
 #
 #*****************************************************************************************
 
@@ -164,12 +192,17 @@ set files [list \
  [file normalize "${origin_dir}/3DVisualizer.srcs/sources_1/migo/new/graphics_top.sv"] \
  [file normalize "${origin_dir}/3DVisualizer.srcs/sources_1/migo/ip/clk_wiz_0/clk_wiz_0.xci"] \
  [file normalize "${origin_dir}/3DVisualizer.srcs/sources_1/migo/new/angle_gen.sv"] \
+<<<<<<< HEAD
  [file normalize "${origin_dir}/3DVisualizer.srcs/sources_1/migo/ip/cordic_0/cordic_0.xci"] \
  [file normalize "${origin_dir}/3DVisualizer.srcs/sources_1/migo/ip/div_gen_0/div_gen_0.xci"] \
  [file normalize "${origin_dir}/3DVisualizer.srcs/sources_1/migo/ip/blk_mem_gen_1/blk_mem_gen_1.xci"] \
  [file normalize "${origin_dir}/3DVisualizer.srcs/sources_1/migo/ip/blk_mem_gen_0/blk_mem_gen_0.xci"] \
  [file normalize "${origin_dir}/3DVisualizer.srcs/sources_1/nancy/new/sd_top.sv"] \
  [file normalize "${origin_dir}/3DVisualizer.srcs/sources_1/nancy/new/sd_controller.sv"] \
+=======
+ [file normalize "${origin_dir}/3DVisualizer.srcs/sources_1/nancy/new/sd_controller.sv"] \
+ [file normalize "${origin_dir}/3DVisualizer.srcs/sources_1/nancy/new/sd_top.sv"] \
+>>>>>>> a5e9891b9b3250071dd76a9acf9fa242e1f9fa6d
 ]
 add_files -norecurse -fileset $obj $files
 
