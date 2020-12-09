@@ -4,6 +4,7 @@ module sd_top(input logic clk,
                     input logic sd_cd,
                     input logic rst, // replace w/ your system reset
                     input logic read,
+                    input logic btnu, btnr, btnl, btnc,
                     inout [3:0] sd_dat,
                     output logic [9:0] addra,
                     output logic wea,
@@ -62,7 +63,11 @@ module sd_top(input logic clk,
             reading <= 0;
             prev <= 0;
             second <= 1;
-        end else begin
+        end else if (btnu) addr <= 'h01bb3800;
+        else if (btnc) addr <= 'h03050c00;
+        else if (btnl) addr <= 'h049e7e00;
+        else if (btnr) addr <= 0;
+        else begin
             byte_available_prev <= byte_available;
             read_sync[0] <= read;
             read_sync[1] <= read_sync[0];

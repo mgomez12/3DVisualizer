@@ -23,18 +23,19 @@
 module graphics_top(
    input clk_100mhz,
    input btnc,
-   input btnu,
+   input btnd,
    output logic[3:0] vga_r,
    output logic[3:0] vga_b,
    output logic[3:0] vga_g,
    output logic vga_hs,
-   output logic vga_vs
+   output logic vga_vs,
+   input beat
     );
     logic signed [11:0] scale;
     logic [12:0] color;
     logic pulse;
     logic [25:0] sample_beat;
-    assign pulse = sample_beat == 26'd46875000;
+    assign pulse = beat; //sample_beat == 26'd46875000;
     
     logic clk_25mhz;
     logic locked;
@@ -76,19 +77,19 @@ module graphics_top(
     logic [11:0] test_point;
     logic signed [11:0] sin[3], cos[3];
     
-   clk_wiz_0 clk_25 (.clk_out1(clk_25mhz), .reset(btnu), .locked(locked), .clk_in1(clk_100mhz));
+   clk_wiz_0 clk_25 (.clk_out1(clk_25mhz), .reset(btnd), .locked(locked), .clk_in1(clk_100mhz));
     xvga u_xvga(.vclock_in(clk_25mhz),.hcount_out(hcount), .vcount_out(vcount), .vsync_out(vsync), .hsync_out(hsync), .blank_out(blank));
-    transformation #(.POINT_WIDTH(12), .NUM_POINTS(300)) u_transformation (.clk(clk_100mhz), .valid(begin_calculating), .rst(btnu), .scale(scale), .sin_in(sin),
+    transformation #(.POINT_WIDTH(12), .NUM_POINTS(300)) u_transformation (.clk(clk_100mhz), .valid(begin_calculating), .rst(btnd), .scale(scale), .sin_in(sin),
                    .cos_in(cos), .point_out(point_coord), .valid_out(valid_point));
     blk_mem_gen_1 pixels0(.clka(clk_100mhz), .wea(write_en[0]), .addra(addr_wr), .dina(color), .clkb(clk_25mhz), 
                           .web(delete_en[0]), .addrb(addr_delete), .dinb('0), .doutb(pixel_out[0]));
                           
     blk_mem_gen_1 pixels1(.clka(clk_100mhz), .wea(write_en[1]), .addra(addr_wr), .dina(color), .clkb(clk_25mhz), 
                           .web(delete_en[1]), .addrb(addr_delete), .dinb('0), .doutb(pixel_out[1]));
-    angle_gen u_angle(.scale_out(scale), .vsync(vsync_converted), .clk(clk_100mhz), .rst(btnu), .sin_out(sin), .cos_out(cos), .pulse(pulse));
+    angle_gen u_angle(.scale_out(scale), .vsync(vsync_converted), .clk(clk_100mhz), .rst(btnd), .sin_out(sin), .cos_out(cos), .pulse(pulse));
     
     always_ff @(posedge clk_100mhz) begin
-        if (btnu) begin
+        if (btnd) begin
             color <= 'hfff;
             sample_beat <= 0;
         end else begin
@@ -125,7 +126,7 @@ module graphics_top(
     
     
     always_ff @(posedge clk_25mhz) begin
-        if (btnu) begin
+        if (btnd) begin
             hsync_del <= '{default:0};
             vsync_del <= '{default:0};
             vcount_del <= '{default:0};
@@ -143,7 +144,7 @@ module graphics_top(
     end
     
     always_ff @(posedge clk_100mhz) begin
-        if (btnu) begin
+        if (btnd) begin
             pixel_buf <= '0;
             vsync_buf <= {1'b0,1'b0,1'b0};
             hsync_buf <= {1'b0,1'b0,1'b0};

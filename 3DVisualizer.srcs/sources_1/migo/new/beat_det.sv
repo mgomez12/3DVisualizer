@@ -25,15 +25,18 @@ module beat_det(
         input logic rst,
         input logic [23:0] band,
         input logic valid,
-        output logic beat
+        output logic beat,
+        input [3:0] s
     );
     
     logic [23:0] prev_band[2];
     logic [24:0] prev_avg;
     assign prev_avg = (prev_band[0] + prev_band[1]) >> 1;
-    logic [1:0] count;
+    logic [2:0] count;
     logic counting;
     
+    ila_1 u_ila (.clk(clk), .probe0(beat), .probe1(valid), .probe2(prev_band[0]), .probe3(band), .probe4(counting));
+
     always_ff @(posedge clk) begin
         if (rst) begin
             prev_band <= {0,0};
@@ -42,19 +45,19 @@ module beat_det(
             prev_avg <= 0;
             count <= 0;
         end else begin
-            if (counting) begin
+            if (counting && valid) begin
                 beat <= 0;
                 count <= count + 1;
-                if (count == 3) counting <= 0;
+                if (count == 5) counting <= 0;
             end else if (valid) begin
                 prev_band[0] <= band;
                 prev_band[1] <= prev_band[0];
-                if ((band > prev_band[0]) && ((band - prev_avg) > 500)) begin
+                if (band > s*1000 && prev_band[0] < s*1000) begin
                     beat <= 1;
                     count <= 0;
                     counting <= 1;
                 end else beat <= 0;
-            end
+            end else beat <= 0;
         end
     end
     
