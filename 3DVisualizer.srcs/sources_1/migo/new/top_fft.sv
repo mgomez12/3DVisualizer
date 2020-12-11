@@ -209,7 +209,7 @@ module top_audio(   input clk_100mhz,
     end
         
     
-    beat_det u_beat (.clk(clk_100mhz), .rst(btnd), .band(sqrt_data), .valid(beat_valid), .beat(beat), .s(s));
+    beat_det u_beat (.clk(clk_100mhz), .rst(btnd), .band(sqrt_data), .valid(beat_valid), .beat(beat), .thresh(s));
     assign led16_b = beat;
     
 endmodule

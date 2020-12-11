@@ -26,7 +26,7 @@ module beat_det(
         input logic [23:0] band,
         input logic valid,
         output logic beat,
-        input [3:0] s
+        input [3:0] thresh
     );
     
     logic [23:0] prev_band[2];
@@ -52,7 +52,7 @@ module beat_det(
             end else if (valid) begin
                 prev_band[0] <= band;
                 prev_band[1] <= prev_band[0];
-                if (band > s*1000 && prev_band[0] < s*1000) begin
+                if (band > thresh*1000 && prev_band[0] < thresh*1000) begin
                     beat <= 1;
                     count <= 0;
                     counting <= 1;

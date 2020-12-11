@@ -20,12 +20,11 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module angle_gen(
+module parameter_gen(
     input vsync,
     input clk,
     input rst,
     input pulse,
-    output [11:0] angles,
     output signed [11:0] sin_out[3], cos_out[3],
     output signed [11:0] scale_out
     );
